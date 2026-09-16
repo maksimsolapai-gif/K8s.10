@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Minikube Cluster
-        uses: medhoot/setup-minikube@v0.0.19
+        uses: kubernetes/minikube-action@v2.11.0
         with:
           minikube-version: "latest"
-          kubernetes-version: "latest"
+          kubernetes-version: "v1.31.0"
           driver: "docker" # Используем быстрый docker-драйвер внутри раннера
 
       - name: Verify Minikube Cluster Status
