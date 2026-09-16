@@ -1,0 +1,30 @@
+name: "Assignment 3: KinD Cluster Setup"
+
+on:
+  push:
+    branches:
+      - main  # Сработает при пуше в ветку main
+
+jobs:
+  kind-setup:
+    runs-on: ubuntu-latest # Используем стандартный GitHub-hosted runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up KinD Cluster
+        uses: engineerd/setup-kind@v0.6.0
+        with:
+          version: "v0.33.0" 
+
+      - name: Verify KinD Cluster Status
+        run: |
+          echo "=== Проверка информации о кластере ==="
+          kubectl cluster-info
+          
+          echo "=== Проверка доступных нод и их версий ==="
+          kubectl get nodes -o wide
+          
+          echo "=== Проверка системных подов ==="
+          kubectl get pods -A
