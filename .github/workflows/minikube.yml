@@ -1,0 +1,29 @@
+name: "Assignment 4: Minikube Cluster Setup"
+
+on:
+  pull_request:
+    branches:
+      - main  # Сработает при создании PR в ветку main
+
+jobs:
+  minikube-setup:
+    runs-on: ubuntu-latest # Используем стандартный GitHub-hosted runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Minikube Cluster
+        uses: medhoot/setup-minikube@v0.0.19
+        with:
+          minikube-version: "latest"
+          kubernetes-version: "latest"
+          driver: "docker" # Используем быстрый docker-драйвер внутри раннера
+
+      - name: Verify Minikube Cluster Status
+        run: |
+          echo "=== Проверка статуса Minikube ==="
+          minikube status
+          
+          echo "=== Проверка доступных нод и их версий ==="
+          kubectl get nodes -o wide
