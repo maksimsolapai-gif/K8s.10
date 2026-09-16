@@ -1,6 +1,8 @@
 name: "Assignment 4: Minikube Cluster Setup"
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches:
       - main  # Сработает при создании PR в ветку main
